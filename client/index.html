@@ -1,0 +1,57 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+    <title>CryptOdometer</title>
+    <meta name="description" content="The HTML5 Herald">
+    <meta name="author" content="SitePoint">
+
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/global.css" rel="stylesheet">
+    <link href="css/content.css" rel="stylesheet">
+    <link href="css/colour.css" rel="stylesheet">
+	
+	<link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/favicon/site.webmanifest">
+	<link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/favicon/favicon.ico">
+	<meta name="msapplication-TileColor" content="#2d89ef">
+	<meta name="msapplication-config" content="/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+
+</head>
+
+<body id="page-top">
+    <div id="container">
+        <section id="content">
+            <div class="title-container">
+                <h1>CryptOdometer</h1>
+                <h2>A blockchain implementation to combat odometer fraud</h2>
+            </div>
+            <div id="instructions-container">
+                <h3>Press "start driving" to simulate driving...</h3>
+            </div>
+            <div id="input-container">
+                <input type="text" id="odometer" placeholder="0"><span>km</span>
+                <button id="start-driving">Start Driving</button>
+                <button id="stop-driving">Stop Driving</button>
+            </div>
+            <div id=status-container">
+                <span id="status">Connecting to network...</span>
+            </div>
+        </section>
+
+        <script src="/socket.io/socket.io.js"></script> <!-- This line is statically set by socket.io library, used in Socket.js -->
+        <script src="js/lib/jquery.min.js"></script>
+        <script src="js/compiled/Socket.js"></script>
+        <script src="js/compiled/Blockchain.js"></script>
+        <script src="js/compiled/Client.js"></script>
+    </div>
+<footer>
+    <div class="flex-right"> <h5>Made by <a href="">Nik</a></h5></div>
+</footer>
+</body>
+</html>

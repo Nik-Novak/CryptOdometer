@@ -1,0 +1,1 @@
+cmd /k PowerShell ./node trackerr.js
