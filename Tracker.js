@@ -24,15 +24,21 @@ class ConsensusRequest{
 
         this.clients.forEach(client=>{
             log("Client validation request sent.");
-            client.emit("validate_blockchain", {
-                data: this.blockchain, callback: () => {
-                    this.counter++;
-                    if (this.counter / clients.length >= this.approvalRatio) {
-                        clearTimeout(timer);
-                        callback(true); //send success
-                    }
+            client.emit("validate_blockchain", {data: this.blockchain},
+                function(result)  {
+                log(result);
+                if(!result) {//failed validation
+                    log("A client determined the blockchain to be invalid!");
+                    return;
                 }
-            });
+                log("A client successfully validated the blockchain!");
+                this.counter++;
+                if (this.counter / this.clients.length >= this.approvalRatio) {
+                    clearTimeout(timer);
+                    callback(true); //send success
+                }
+            }
+            );
         });
     }
 }

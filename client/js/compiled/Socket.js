@@ -14,10 +14,11 @@ socket.on('receive_blockchain', (bc)=>{
     client.blockchain = bc;
 });
 
-socket.on('validate_blockchain', (packet)=>{
+socket.on('validate_blockchain', (packet, cb)=>{
     slog("Blockchain validation requested.");
     console.log(packet);
-    //bc.validate();
+    cb(true);
+    //bc = new Blockchain(packet.)
 });
 
 socket.on('test', ()=>{
