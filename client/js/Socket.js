@@ -1,7 +1,9 @@
 console.log('INIT Socket.jssssss!');
 
-var socket = io.connect(window.location.origin); //connects to localhost:8080 in this case
+var Blockchain = require('./Blockchain').Blockchain;
+var Block = require('./Blockchain').Block;
 
+var socket = io.connect(window.location.origin); //connects to localhost:8080 in this case
 
 socket.on('syn_ack', ()=>{
     slog("syn_ack Server connected.");
@@ -10,14 +12,21 @@ socket.on('syn_ack', ()=>{
 
 socket.on('receive_blockchain', (bc)=>{
     slog("receive_blockchain Blockchain Sent.");
-    client.blockchain = bc;
+    log("RECEIVED BC!!!");
+    log(client);
 });
 
 socket.on('validate_blockchain', (packet, cb)=>{
     slog("Blockchain validation requested.");
     console.log(packet);
-    cb(true);
-    //bc = new Blockchain(packet.)
+    //cb(true);
+    bc = new Blockchain(packet.data.difficulty);
+    bc.chain = packet.data.chain;
+    log(bc.chain);
+    if(bc.isValid())
+        cb(true);
+    else
+        cb(false);
 });
 
 socket.on('test', ()=>{

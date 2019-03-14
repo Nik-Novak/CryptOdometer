@@ -32,9 +32,6 @@ class Client{
     }
 }
 
-var client = new Client();
-client.run();
-
 
 // //TEST
 // let bc = new Blockchain(2);

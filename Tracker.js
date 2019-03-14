@@ -25,14 +25,16 @@ class ConsensusRequest{
         this.clients.forEach(client=>{
             log("Client validation request sent.");
             client.emit("validate_blockchain", {data: this.blockchain},
-                function(result)  {
+                (result) => {
                 log(result);
                 if(!result) {//failed validation
                     log("A client determined the blockchain to be invalid!");
                     return;
                 }
                 log("A client successfully validated the blockchain!");
+
                 this.counter++;
+                log("counter: "+ this.counter + " \t clients.length: " + this.clients.length + " \t ratio: " + this.counter / this.clients.length);
                 if (this.counter / this.clients.length >= this.approvalRatio) {
                     clearTimeout(timer);
                     callback(true); //send success
@@ -88,10 +90,11 @@ class Tracker {
 
             socket.on('request_blockchain', ()=>{
                 log("Client requesting blockchain.");
-                socket.emit('test');
                 new ConsensusRequest(this.blockchain, this.clients, 0.51).validateBlockchain((result)=>{
-                    if(result)
+                    if(result) {
+                        log("CONSENSUS SUCCESSFUL, sending blockchain");
                         socket.emit('receive_blockchain', this.blockchain);
+                    }
                     else
                         socket.emit('receive_blockchain_error');
                 });
