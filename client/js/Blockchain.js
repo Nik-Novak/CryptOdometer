@@ -37,9 +37,17 @@ class Block{
     }
 }
 
+class Transaction{
+    constructor(vehicleID, timeStamp, mileage){
+        this.timeStamp = timeStamp;
+        this.mileage=mileage;
+    }
+}
+
 class Blockchain{
     constructor(difficulty=2){
         this.chain = [ this.createGenesisBlock() ];
+        this.pendingTransactions = [];
         this.difficulty = difficulty;
     }
     
@@ -50,12 +58,31 @@ class Blockchain{
     getLatestBlock(){
         return this.chain[this.chain.length-1];
     }
-    
-    addBlock(newBlock){
-        newBlock.previousHash = this.getLatestBlock().hash;
-        newBlock.mineBlock(this.difficulty);//newBlock.hash = newBlock.calculateHash();
-        this.chain.push(newBlock);
+
+    minePendingTransactions(){
+        let block = new Block(0,Date.now(), this.pendingTransactions);
+        block.previousHash = this.getLatestBlock().hash;
+        block.mineBlock(this.difficulty);
+
+        console.log('Block successfully mined!');
+        this.chain.push(block);
+
+        this.pendingTransactions = [];
     }
+
+    createTransaction(transaction){
+        this.pendingTransactions.push(transaction);
+    }
+
+    validateOdometerHistory(){
+
+    }
+
+    // addBlock(newBlock){
+    //     newBlock.previousHash = this.getLatestBlock().hash;
+    //     newBlock.mineBlock(this.difficulty);//newBlock.hash = newBlock.calculateHash();
+    //     this.chain.push(newBlock);
+    // }
     
     isValid(){
         for (let i=1; i< this.chain.length; i++){

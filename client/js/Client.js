@@ -27,11 +27,12 @@ class Client{
         }, 100);
 
         setInterval(()=>{ //Upload odometer reading to
-            //BLockchain
+
         }, 10000);
     }
 }
 
+var client = new Client();
 
 // //TEST
 // let bc = new Blockchain(2);
@@ -42,3 +43,7 @@ class Client{
 // console.log( bc );
 // console.log("isValid? " + bc.isValid());
 
+module.exports = {
+    Client: Client,
+    client: client
+};

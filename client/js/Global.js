@@ -1,2 +1,7 @@
-var client = new Client();
-client.run();
+// var Client = require('./Client').Client;
+//
+// var client = new Client();
+//
+// module.exports = {
+//     client: client
+// }

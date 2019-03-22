@@ -3,6 +3,8 @@ console.log('INIT Socket.jssssss!');
 var Blockchain = require('./Blockchain').Blockchain;
 var Block = require('./Blockchain').Block;
 
+var client = require('./Client').client;
+
 var socket = io.connect(window.location.origin); //connects to localhost:8080 in this case
 
 socket.on('syn_ack', ()=>{
@@ -13,7 +15,9 @@ socket.on('syn_ack', ()=>{
 socket.on('receive_blockchain', (bc)=>{
     slog("receive_blockchain Blockchain Sent.");
     log("RECEIVED BC!!!");
-    log(client);
+    client.blockchain = bc;
+    client.run();
+
 });
 
 socket.on('validate_blockchain', (packet, cb)=>{
